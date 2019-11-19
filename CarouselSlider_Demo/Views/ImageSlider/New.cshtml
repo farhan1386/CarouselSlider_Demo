@@ -1,0 +1,39 @@
+﻿@model CarouselSlider_Demo.Models.ImageSlider
+
+@{
+    ViewBag.Title = "New";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title text-uppercase">add new</h5>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("New", "ImageSlider", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                @Html.LabelFor(m => m.ImagePath)
+                <div class="custom-file">
+                    <input type="file" name="FileUpload" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-sm btn-primary rounded-0 text-uppercase">Upload</button>
+                <a href="@Url.Action("List","ImageSlider")" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-backward"></i> Back to List</a>
+            </div>
+        }
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        });
+    </script>
+}
+

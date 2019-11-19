@@ -1,0 +1,36 @@
+﻿@model CarouselSlider_Demo.Models.ImageSlider
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title text-uppercase">Delete Image</h5>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger">
+            <h5>Are you sure want to delete this?</h5>
+        </div>
+        <dl class="row">
+            <dt class="col-md-2">@Html.DisplayNameFor(m => m.ImageName)</dt>
+            <dd class="col-md-10">@Html.DisplayFor(m => m.ImageName)</dd>
+            <dt class="col-md-2">@Html.DisplayNameFor(m => m.ImagePath)</dt>
+            <dd class="col-md-10">
+                <img src="@Url.Content(Model.ImagePath)" alt="@Model.ImageName" class="img-thumbnail" width="100" height="100" />
+            </dd>
+        </dl>
+        <div class="form-group">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
+                    <button type="submit" class="btn btn-danger btn-sm rounded-0"><i class="fas fa-trash"></i> Delete</button>
+                    <a href="@Url.Action("Edit","ImageSlider")" class="btn btn-sm btn-info rounded-0 text-uppercase"><i class="fas fa-edit"></i> Edit</a>
+                    <a href="@Url.Action("List","ImageSlider")" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i> Back to list</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
